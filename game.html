@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>لعبة حجر ورقة مقص</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            background-color: #2196F3;
+            padding: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function playGame(choice) {
+            const options = ["حجر", "ورقة", "مقص"];
+            const computerChoice = options[Math.floor(Math.random() * 3)];
+            let result;
+
+            if (choice === computerChoice) {
+                result = "تعادل!";
+            } else if (
+                (choice === "حجر" && computerChoice === "مقص") ||
+                (choice === "ورقة" && computerChoice === "حجر") ||
+                (choice === "مقص" && computerChoice === "ورقة")
+            ) {
+                result = "فزت!";
+            } else {
+                result = "خسرت!";
+            }
+
+            alert(`اختيارك: ${choice}\nاختيار الكمبيوتر: ${computerChoice}\nالنتيجة: ${result}`);
+        }
+    </script>
+</head>
+<body>
+    <div class="header">لعبة حجر ورقة مقص</div>
+    <h1>اختر خيارك:</h1>
+    <button class="button" onclick="playGame('حجر')">حجر</button>
+    <button class="button" onclick="playGame('ورقة')">ورقة</button>
+    <button class="button" onclick="playGame('مقص')">مقص</button>
+</body>
+</html>
