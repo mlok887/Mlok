@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الصفحة الرئيسية</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* لضبط العناصر */
+            height: 100vh;
+        }
+        .header {
+            background-color: #2196F3;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content {
+            text-align: center;
+            margin: auto;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>مرحباً بك في موقعي</h1>
-    <a href="page2.html">الانتقال إلى الصفحة الثانية</a>
+    <div class="header">مرحبًا بك</div>
+    <div class="content">
+        <h1>مرحبًا بك في موقعي!</h1>
+        <p>اضغط على الزر أدناه للانتقال إلى اللعبة.</p>
+    </div>
+    <div class="footer">
+        <a href="game.html" class="button">التالي</a>
+    </div>
 </body>
 </html>
