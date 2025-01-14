@@ -10,45 +10,49 @@
             background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* لضبط العناصر */
+            justify-content: center;
+            align-items: center;
             height: 100vh;
+            text-align: center;
         }
         .header {
-            background-color: #2196F3;
-            padding: 10px 0;
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 50px;
         }
         .content {
-            text-align: center;
-            margin: auto;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-        }
-        .button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .start-button {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            border-radius: 5px;
+            padding: 15px 30px;
+            font-size: 24px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 18px;
-            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .start-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="header">مرحبًا بك</div>
+    <div class="header">
+        🪨 <!-- حجر -->
+        📄 <!-- ورقة -->
+        ✂️ <!-- مقص -->
+    </div>
     <div class="content">
-        <h1>مرحبًا بك في موقعي!</h1>
-        <p>اضغط على الزر أدناه للانتقال إلى اللعبة.</p>
+        <h1>مرحبًا بك في لعبتنا المتواضعة</h1>
     </div>
-    <div class="footer">
-        <a href="game.html" class="button">التالي</a>
-    </div>
+    <button class="start-button" onclick="location.href='game.html'">بدء</button>
 </body>
 </html>
