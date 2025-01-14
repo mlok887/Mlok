@@ -9,27 +9,75 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             text-align: center;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .header {
-            background-color: #2196F3;
-            padding: 10px;
-            color: white;
-            font-size: 24px;
+            font-size: 36px;
             font-weight: bold;
+            margin-bottom: 20px;
         }
         .button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             margin: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .score {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
+        .win-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 40px 60px;
+            border-radius: 10px;
+            font-size: 36px;
+            font-weight: bold;
+            display: none;
+            z-index: 999;
         }
     </style>
+</head>
+<body>
+    <div class="header">لعبة حجر ورقة مقص</div>
+    <div>
+        <button class="button" onclick="playGame('حجر')">🪨 حجر</button>
+        <button class="button" onclick="playGame('ورقة')">📄 ورقة</button>
+        <button class="button" onclick="playGame('مقص')">✂️ مقص</button>
+    </div>
+    <div class="score" id="score">النتيجة: 0</div>
+    <canvas class="confetti" id="confetti"></canvas>
+    <div class="win-message" id="winMessage">مبروك فزت!</div>
+
     <script>
+        let score = 0;
+
         function playGame(choice) {
             const options = ["حجر", "ورقة", "مقص"];
             const computerChoice = options[Math.floor(Math.random() * 3)];
@@ -43,19 +91,62 @@
                 (choice === "مقص" && computerChoice === "ورقة")
             ) {
                 result = "فزت!";
+                score++;
+                showConfetti();
+                showWinMessage();
             } else {
                 result = "خسرت!";
             }
 
             alert(`اختيارك: ${choice}\nاختيار الكمبيوتر: ${computerChoice}\nالنتيجة: ${result}`);
+            document.getElementById("score").textContent = `النتيجة: ${score}`;
+        }
+
+        function showConfetti() {
+            const confettiCanvas = document.getElementById('confetti');
+            const confetti = confettiCanvas.getContext('2d');
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            confettiCanvas.style.display = "block";
+
+            let particles = [];
+
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: Math.random() * confettiCanvas.height,
+                    r: Math.random() * 6 + 4,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    speed: Math.random() * 4 + 2,
+                });
+            }
+
+            function draw() {
+                confetti.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                particles.forEach(particle => {
+                    confetti.beginPath();
+                    confetti.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+                    confetti.fillStyle = particle.color;
+                    confetti.fill();
+                    particle.y -= particle.speed;
+                    if (particle.y < 0) particle.y = confettiCanvas.height;
+                });
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+            setTimeout(() => {
+                confettiCanvas.style.display = "none";
+            }, 3000);
+        }
+
+        function showWinMessage() {
+            const winMessage = document.getElementById('winMessage');
+            winMessage.style.display = 'block';
+            setTimeout(() => {
+                winMessage.style.display = 'none';
+            }, 3000);
         }
     </script>
-</head>
-<body>
-    <div class="header">لعبة حجر ورقة مقص</div>
-    <h1>اختر خيارك:</h1>
-    <button class="button" onclick="playGame('حجر')">حجر</button>
-    <button class="button" onclick="playGame('ورقة')">ورقة</button>
-    <button class="button" onclick="playGame('مقص')">مقص</button>
 </body>
 </html>
